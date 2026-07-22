@@ -1,0 +1,29 @@
+body{
+    font-family: Arial;
+    margin:20px;
+}
+
+input,select,button{
+    padding:8px;
+    margin:5px;
+}
+
+table{
+    width:80%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+th,td{
+    padding:10px;
+    text-align:center;
+}
+
+button{
+    cursor:pointer;
+}
+
+#message{
+    color:rgb(0, 81, 255);
+    font-weight:bold;
+}
