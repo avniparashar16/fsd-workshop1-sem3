@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouse Events</title>
+    <style>
+        #box{
+            height:300px;
+            width:300px;
+            background-color:lavender;
+            margin: 200px 0 0 100px;
+            border:5px solid black;  
+        }
+    </style>
+    <script>
+        function eventcall(){
+            alert("This is a mouse event.");
+        }
+        // function eventcall2(){
+        //     alert("Mouse is out of the box");
+        // }
+        // function doubleclick(){
+        //     alert("This is a double click event.");
+        // }
+    
+    </script>
+</head>
+<body>
+    <div id="box" onmouseout="eventcall()">This is DS section A</div>
+    <p id ="para" onmouseover="eventcall()">This is a paragraph section.we are studying mouse events. </p>
+</body>
+</html
