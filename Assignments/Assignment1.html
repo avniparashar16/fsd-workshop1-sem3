@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FSD Quiz</title>
+
+    <!-- Connect CSS file -->
+    <link rel="stylesheet" href="Assignment1.css">
+
+</head>
+
+
+<body>
+
+    <div class="container">
+
+
+        <!-- =========================
+             START PAGE
+        ========================== -->
+
+        <div id="startPage">
+
+            <h1>FSD Quiz</h1>
+
+            <p class="subtitle">
+                Full Stack Development Quiz
+            </p>
+
+
+            <form id="studentForm">
+
+
+                <!-- Full Name -->
+
+                <label for="fullname">
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="fullname"
+                    placeholder="Enter your full name"
+                    required
+                >
+
+
+                <!-- Roll Number -->
+
+                <label for="rollno">
+                    Roll No
+                </label>
+
+                <input
+                    type="text"
+                    id="rollno"
+                    placeholder="Enter your roll no"
+                    required
+                >
+
+
+                <!-- Section -->
+
+                <label for="section">
+                    Section
+                </label>
+
+                <select id="section">
+
+                    <option value="A">A</option>
+
+                    <option value="B">B</option>
+
+                    <option value="C">C</option>
+
+                </select>
+
+
+                <!-- Start Button -->
+
+                <button type="submit">
+                    Start Quiz
+                </button>
+
+            </form>
+
+        </div>
+
+
+
+        <!-- =========================
+             QUIZ PAGE
+        ========================== -->
+
+        <div id="quizPage">
+
+
+            <div class="quiz-heading">
+
+                <h1>FSD Quiz</h1>
+
+            </div>
+
+
+            <!-- Question Number -->
+
+            <p id="questionNumber">
+                Question 1 of 10
+            </p>
+
+
+            <!-- Question -->
+
+            <h2 id="question">
+                Question will appear here
+            </h2>
+
+
+            <!-- Options -->
+
+            <div class="options">
+
+
+                <label class="option">
+
+                    <input
+                        type="radio"
+                        name="answer"
+                        value="0"
+                    >
+
+                    <span id="option0"></span>
+
+                </label>
+
+
+                <label class="option">
+
+                    <input
+                        type="radio"
+                        name="answer"
+                        value="1"
+                    >
+
+                    <span id="option1"></span>
+
+                </label>
+
+
+                <label class="option">
+
+                    <input
+                        type="radio"
+                        name="answer"
+                        value="2"
+                    >
+
+                    <span id="option2"></span>
+
+                </label>
+
+
+                <label class="option">
+
+                    <input
+                        type="radio"
+                        name="answer"
+                        value="3"
+                    >
+
+                    <span id="option3"></span>
+
+                </label>
+
+
+            </div>
+
+
+            <!-- Buttons -->
+
+            <div class="button-area">
+
+
+                <button
+                    id="nextButton"
+                    onclick="nextQuestion()"
+                >
+                    Next
+                </button>
+
+
+                <button
+                    id="submitButton"
+                    onclick="submitQuiz()"
+                >
+                    Submit
+                </button>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================
+             RESULT PAGE
+        ========================== -->
+
+        <div id="resultPage">
+
+            <h1>Quiz Completed!</h1>
+
+
+            <p id="studentResult"></p>
+
+
+            <p>
+                Roll No:
+                <span id="resultRollNo"></span>
+            </p>
+
+
+            <p>
+                Section:
+                <span id="resultSection"></span>
+            </p>
+
+
+            <!-- Score -->
+
+            <div class="score">
+
+                <p>Your Score</p>
+
+                <h2 id="finalScore">
+                    0 / 10
+                </h2>
+
+            </div>
+
+
+            <!-- Result Message -->
+
+            <p id="message"></p>
+
+
+            <!-- Try Again -->
+
+            <button onclick="restartQuiz()">
+                Try Again
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- Connect JavaScript file -->
+
+    <script src="Assignment1.js"></script>
+
+</body>
+
+</html>

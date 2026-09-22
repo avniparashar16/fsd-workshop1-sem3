@@ -1,0 +1,355 @@
+/* =========================
+   BODY
+========================= */
+
+body {
+
+    font-family: Arial, sans-serif;
+
+    background-color: #e2b6a6;
+
+    margin: 0;
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+.container {
+
+    width: 90%;
+
+    max-width: 500px;
+
+    background-color: white;
+
+    padding: 30px;
+
+    border-radius: 10px;
+
+    box-shadow: 0 3px 10px
+                rgba(0, 0, 0, 0.2);
+
+    text-align: center;
+
+}
+
+
+/* =========================
+   HEADINGS
+========================= */
+
+h1 {
+
+    font-family: Georgia, serif;
+
+    color: #333;
+
+    margin-top: 0;
+
+}
+
+
+.subtitle {
+
+    color: #666;
+
+    margin-bottom: 25px;
+
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+form {
+
+    text-align: left;
+
+}
+
+
+form label {
+
+    display: block;
+
+    margin-top: 15px;
+
+    margin-bottom: 5px;
+
+    color: #333;
+
+    font-weight: bold;
+
+}
+
+
+input[type="text"],
+select {
+
+    width: 100%;
+
+    padding: 10px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #aaa;
+
+    border-radius: 4px;
+
+    font-size: 14px;
+
+}
+
+
+input[type="text"]:focus,
+select:focus {
+
+    outline: none;
+
+    border-color: #b56f5a;
+
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+button {
+
+    background-color: #b56f5a;
+
+    color: white;
+
+    border: none;
+
+    padding: 10px 25px;
+
+    border-radius: 4px;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+}
+
+
+button:hover {
+
+    background-color: #914f3e;
+
+}
+
+
+form button {
+
+    display: block;
+
+    margin: 25px auto 0;
+
+}
+
+
+/* =========================
+   QUIZ HEADING
+========================= */
+
+.quiz-heading {
+
+    border-bottom: 1px solid #ddd;
+
+    padding-bottom: 10px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.quiz-heading h1 {
+
+    font-size: 25px;
+
+    margin: 0;
+
+}
+
+
+/* =========================
+   QUESTION
+========================= */
+
+#questionNumber {
+
+    text-align: left;
+
+    color: #777;
+
+    font-size: 14px;
+
+}
+
+
+#question {
+
+    text-align: left;
+
+    font-size: 19px;
+
+    color: #333;
+
+    margin-bottom: 20px;
+
+}
+
+
+/* =========================
+   OPTIONS
+========================= */
+
+.options {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+}
+
+
+.option {
+
+    display: block;
+
+    text-align: left;
+
+    padding: 12px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+}
+
+
+.option:hover {
+
+    background-color: #f8eeee;
+
+}
+
+
+.option input {
+
+    margin-right: 8px;
+
+}
+
+
+/* =========================
+   BUTTON AREA
+========================= */
+
+.button-area {
+
+    text-align: right;
+
+    margin-top: 20px;
+
+}
+
+
+/* Hide Submit initially */
+
+#submitButton {
+
+    display: none;
+
+}
+
+
+/* =========================
+   SCORE
+========================= */
+
+.score {
+
+    background-color: #f5e1db;
+
+    border: 1px solid #ddd;
+
+    padding: 15px;
+
+    margin: 20px 0;
+
+    border-radius: 5px;
+
+}
+
+
+.score p {
+
+    margin: 0;
+
+    color: #666;
+
+}
+
+
+.score h2 {
+
+    font-size: 35px;
+
+    margin: 10px;
+
+    color: #8a4938;
+
+}
+
+
+/* =========================
+   HIDE PAGES
+========================= */
+
+#quizPage,
+#resultPage {
+
+    display: none;
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .container {
+
+        padding: 20px;
+
+    }
+
+
+    .button-area {
+
+        text-align: center;
+
+    }
+
+}
