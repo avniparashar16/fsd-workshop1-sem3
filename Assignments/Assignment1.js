@@ -154,6 +154,12 @@ let currentQuestion = 0;
 
 let score = 0;
 
+let answered = false;
+
+let time = 120;
+
+let timer;
+
 
 /* =========================
    START QUIZ
@@ -169,28 +175,28 @@ document.getElementById("studentForm").addEventListener(
 
         score = 0;
 
+        time = 120;
 
-        /* Hide start page */
+        answered = false;
+
 
         document.getElementById("startPage").style.display =
             "none";
 
-
-        /* Show quiz page */
-
         document.getElementById("quizPage").style.display =
             "block";
-
-
-        /* Hide result page */
 
         document.getElementById("resultPage").style.display =
             "none";
 
 
-        /* Show first question */
+        document.getElementById("timer").textContent =
+            "02:00";
+
 
         showQuestion();
+
+        startTimer();
 
     }
 );
@@ -204,8 +210,10 @@ function showQuestion() {
 
     let q = questions[currentQuestion];
 
+    answered = false;
 
-    /* Show question number */
+
+    /* Question number */
 
     document.getElementById("questionNumber").textContent =
         "Question " +
@@ -214,56 +222,185 @@ function showQuestion() {
         questions.length;
 
 
-    /* Show question */
+    /* Question */
 
     document.getElementById("question").textContent =
         q.question;
 
 
-    /* Show four options */
+    /* Clear old options */
 
-    for (let i = 0; i < 4; i++) {
-
-        document.getElementById("option" + i).textContent =
-            q.options[i];
-
-    }
+    document.getElementById("options").innerHTML = "";
 
 
-    /* Remove previous selection */
+    /* Clear message */
 
-    let options =
-        document.getElementsByName("answer");
+    document.getElementById("answerMessage").textContent =
+        "";
 
 
-    for (let i = 0; i < options.length; i++) {
+    /* Disable Next */
 
-        options[i].checked = false;
+    document.getElementById("nextButton").disabled =
+        true;
+
+
+    /* Create four options */
+
+    for (let i = 0; i < q.options.length; i++) {
+
+        let option = document.createElement("div");
+
+        option.className = "option";
+
+        option.textContent = q.options[i];
+
+
+        /*
+           Mouse click event
+        */
+
+        option.addEventListener(
+            "click",
+            function() {
+
+                checkAnswer(i, option);
+
+            }
+        );
+
+
+        /*
+           Mouse over event
+        */
+
+        option.addEventListener(
+            "mouseover",
+            function() {
+
+                if (!answered) {
+
+                    option.style.transform =
+                        "scale(1.02)";
+
+                }
+
+            }
+        );
+
+
+        /*
+           Mouse out event
+        */
+
+        option.addEventListener(
+            "mouseout",
+            function() {
+
+                option.style.transform =
+                    "scale(1)";
+
+            }
+        );
+
+
+        document.getElementById("options")
+            .appendChild(option);
 
     }
 
 
     /* Last question */
 
-    if (currentQuestion == questions.length - 1) {
+    if (currentQuestion ==
+        questions.length - 1) {
 
-        document.getElementById("nextButton").style.display =
-            "none";
+        document.getElementById("nextButton")
+            .style.display = "none";
 
-        document.getElementById("submitButton").style.display =
-            "inline-block";
+        document.getElementById("submitButton")
+            .style.display = "inline-block";
 
     }
 
     else {
 
-        document.getElementById("nextButton").style.display =
-            "inline-block";
+        document.getElementById("nextButton")
+            .style.display = "inline-block";
 
-        document.getElementById("submitButton").style.display =
-            "none";
+        document.getElementById("submitButton")
+            .style.display = "none";
 
     }
+
+}
+
+
+/* =========================
+   CHECK ANSWER
+========================= */
+
+function checkAnswer(selectedAnswer, selectedOption) {
+
+    /* Prevent selecting again */
+
+    if (answered) {
+
+        return;
+
+    }
+
+
+    answered = true;
+
+
+    let correctAnswer =
+        questions[currentQuestion].answer;
+
+
+    let allOptions =
+        document.getElementsByClassName("option");
+
+
+    /* Correct answer */
+
+    if (selectedAnswer == correctAnswer) {
+
+        selectedOption.classList.add("correct");
+
+        score++;
+
+        document.getElementById("answerMessage")
+            .textContent =
+            "Correct Answer!";
+
+    }
+
+
+    /* Wrong answer */
+
+    else {
+
+        selectedOption.classList.add("wrong");
+
+
+        document.getElementById("answerMessage")
+            .textContent =
+            "Wrong Answer! Correct answer is highlighted in green.";
+
+
+        /* Highlight correct answer */
+
+        allOptions[correctAnswer]
+            .classList.add("correct");
+
+    }
+
+
+    /* Enable Next */
+
+    document.getElementById("nextButton")
+        .disabled = false;
 
 }
 
@@ -274,43 +411,16 @@ function showQuestion() {
 
 function nextQuestion() {
 
-    /* Find selected option */
+    if (!answered) {
 
-    let selected =
-        document.querySelector(
-            'input[name="answer"]:checked'
-        );
-
-
-    /* Check whether an option is selected */
-
-    if (selected == null) {
-
-        alert("Please select an answer!");
+        alert("Please select an answer first.");
 
         return;
 
     }
 
 
-    /* Check the answer */
-
-    if (
-        Number(selected.value) ==
-        questions[currentQuestion].answer
-    ) {
-
-        score++;
-
-    }
-
-
-    /* Move to next question */
-
     currentQuestion++;
-
-
-    /* Display next question */
 
     showQuestion();
 
@@ -323,35 +433,16 @@ function nextQuestion() {
 
 function submitQuiz() {
 
-    /* Find selected option */
+    if (!answered) {
 
-    let selected =
-        document.querySelector(
-            'input[name="answer"]:checked'
-        );
-
-
-    /* Check whether answer is selected */
-
-    if (selected == null) {
-
-        alert("Please select an answer!");
+        alert("Please select an answer first.");
 
         return;
 
     }
 
 
-    /* Check final answer */
-
-    if (
-        Number(selected.value) ==
-        questions[currentQuestion].answer
-    ) {
-
-        score++;
-
-    }
+    clearInterval(timer);
 
 
     /* Get student details */
@@ -366,61 +457,64 @@ function submitQuiz() {
         document.getElementById("section").value;
 
 
-    /* Hide quiz page */
+    /* Hide quiz */
 
     document.getElementById("quizPage").style.display =
         "none";
 
 
-    /* Show result page */
+    /* Show result */
 
     document.getElementById("resultPage").style.display =
         "block";
 
 
-    /* Display name */
+    /* Display student details */
 
-    document.getElementById("studentResult").textContent =
+    document.getElementById("studentResult")
+        .textContent =
         "Well done, " + name + "!";
 
 
-    /* Display roll number */
-
-    document.getElementById("resultRollNo").textContent =
+    document.getElementById("resultRollNo")
+        .textContent =
         roll;
 
 
-    /* Display section */
-
-    document.getElementById("resultSection").textContent =
+    document.getElementById("resultSection")
+        .textContent =
         section;
 
 
     /* Display score */
 
-    document.getElementById("finalScore").textContent =
+    document.getElementById("finalScore")
+        .textContent =
         score + " / " + questions.length;
 
 
-    /* Display result message */
+    /* Result message */
 
     if (score >= 8) {
 
-        document.getElementById("message").textContent =
+        document.getElementById("message")
+            .textContent =
             "Excellent performance!";
 
     }
 
     else if (score >= 5) {
 
-        document.getElementById("message").textContent =
+        document.getElementById("message")
+            .textContent =
             "Good job! Keep practicing.";
 
     }
 
     else {
 
-        document.getElementById("message").textContent =
+        document.getElementById("message")
+            .textContent =
             "Keep practicing and try again.";
 
     }
@@ -429,45 +523,146 @@ function submitQuiz() {
 
 
 /* =========================
-   RESTART QUIZ
+   TIMER
 ========================= */
 
-function restartQuiz() {
+function startTimer() {
 
-    /* Reset score */
-
-    score = 0;
+    clearInterval(timer);
 
 
-    /* Reset question */
+    timer = setInterval(
+        function() {
 
-    currentQuestion = 0;
-
-
-    /* Hide result page */
-
-    document.getElementById("resultPage").style.display =
-        "none";
+            time--;
 
 
-    /* Hide quiz page */
+            let minutes =
+                Math.floor(time / 60);
 
-    document.getElementById("quizPage").style.display =
-        "none";
-
-
-    /* Show start page */
-
-    document.getElementById("startPage").style.display =
-        "block";
+            let seconds =
+                time % 60;
 
 
-    /* Clear previous student details */
+            let displayTime =
+                String(minutes).padStart(2, "0")
+                + ":" +
+                String(seconds).padStart(2, "0");
 
-    document.getElementById("fullname").value = "";
 
-    document.getElementById("rollno").value = "";
+            document.getElementById("timer")
+                .textContent =
+                displayTime;
 
-    document.getElementById("section").value = "A";
+
+            /* Time finished */
+
+            if (time <= 0) {
+
+                clearInterval(timer);
+
+                alert("Time is over!");
+
+                submitQuiz();
+
+            }
+
+        },
+        1000
+    );
 
 }
+
+
+/* =========================
+   KEYBOARD EVENTS
+========================= */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        /*
+           Enter key
+           Moves to next question
+        */
+
+        if (event.key == "Enter") {
+
+            if (
+                document.getElementById("quizPage")
+                    .style.display == "block"
+            ) {
+
+                if (
+                    currentQuestion <
+                    questions.length - 1
+                ) {
+
+                    nextQuestion();
+
+                }
+
+            }
+
+        }
+
+
+        /*
+           Right Arrow key
+           Moves to next question
+        */
+
+        if (event.key == "ArrowRight") {
+
+            if (
+                document.getElementById("quizPage")
+                    .style.display == "block"
+            ) {
+
+                if (
+                    currentQuestion <
+                    questions.length - 1
+                ) {
+
+                    nextQuestion();
+
+                }
+
+            }
+
+        }
+
+
+        /*
+           Escape key
+           Shows confirmation before leaving quiz
+        */
+
+        if (event.key == "Escape") {
+
+            if (
+                document.getElementById("quizPage")
+                    .style.display == "block"
+            ) {
+
+                let leave =
+                    confirm(
+                        "Do you want to leave the quiz?"
+                    );
+
+
+                if (leave) {
+
+                    clearInterval(timer);
+
+                    restartQuiz();
+
+                }
+
+            }
+
+        }
+
+    }
+);

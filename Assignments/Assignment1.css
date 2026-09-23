@@ -153,6 +153,15 @@ button:hover {
 }
 
 
+button:disabled {
+
+    background-color: #bbb;
+
+    cursor: not-allowed;
+
+}
+
+
 form button {
 
     display: block;
@@ -170,7 +179,7 @@ form button {
 
     border-bottom: 1px solid #ddd;
 
-    padding-bottom: 10px;
+    padding-bottom: 15px;
 
     margin-bottom: 20px;
 
@@ -181,7 +190,28 @@ form button {
 
     font-size: 25px;
 
-    margin: 0;
+    margin: 0 0 10px 0;
+
+}
+
+
+/* =========================
+   TIMER
+========================= */
+
+.timer {
+
+    display: inline-block;
+
+    background-color: #f5e1db;
+
+    color: #8a4938;
+
+    padding: 7px 12px;
+
+    border-radius: 5px;
+
+    font-weight: bold;
 
 }
 
@@ -214,6 +244,15 @@ form button {
 }
 
 
+/* Question hover effect */
+
+#question:hover {
+
+    color: #8a4938;
+
+}
+
+
 /* =========================
    OPTIONS
 ========================= */
@@ -231,17 +270,19 @@ form button {
 
 .option {
 
-    display: block;
-
-    text-align: left;
-
     padding: 12px;
 
     border: 1px solid #ccc;
 
     border-radius: 5px;
 
+    text-align: left;
+
     cursor: pointer;
+
+    background-color: white;
+
+    transition: 0.2s;
 
 }
 
@@ -250,12 +291,46 @@ form button {
 
     background-color: #f8eeee;
 
+    border-color: #b56f5a;
+
 }
 
 
-.option input {
+/* Correct answer */
 
-    margin-right: 8px;
+.correct {
+
+    background-color: #c8e6c9;
+
+    border-color: green;
+
+    color: #155724;
+
+}
+
+
+/* Wrong answer */
+
+.wrong {
+
+    background-color: #f5c6cb;
+
+    border-color: red;
+
+    color: #721c24;
+
+}
+
+
+/* =========================
+   ANSWER MESSAGE
+========================= */
+
+#answerMessage {
+
+    font-weight: bold;
+
+    min-height: 20px;
 
 }
 
@@ -273,7 +348,7 @@ form button {
 }
 
 
-/* Hide Submit initially */
+/* Hide submit initially */
 
 #submitButton {
 

@@ -10,7 +10,7 @@
 
     <title>FSD Quiz</title>
 
-    <!-- Connect CSS file -->
+    <!-- Connect CSS -->
     <link rel="stylesheet" href="Assignment1.css">
 
 </head>
@@ -33,11 +33,7 @@
                 Full Stack Development Quiz
             </p>
 
-
             <form id="studentForm">
-
-
-                <!-- Full Name -->
 
                 <label for="fullname">
                     Full Name
@@ -51,8 +47,6 @@
                 >
 
 
-                <!-- Roll Number -->
-
                 <label for="rollno">
                     Roll No
                 </label>
@@ -64,8 +58,6 @@
                     required
                 >
 
-
-                <!-- Section -->
 
                 <label for="section">
                     Section
@@ -81,8 +73,6 @@
 
                 </select>
 
-
-                <!-- Start Button -->
 
                 <button type="submit">
                     Start Quiz
@@ -100,96 +90,42 @@
 
         <div id="quizPage">
 
-
             <div class="quiz-heading">
 
                 <h1>FSD Quiz</h1>
 
+                <div class="timer">
+                    Time Left:
+                    <span id="timer">02:00</span>
+                </div>
+
             </div>
 
-
-            <!-- Question Number -->
 
             <p id="questionNumber">
                 Question 1 of 10
             </p>
 
 
-            <!-- Question -->
-
             <h2 id="question">
                 Question will appear here
             </h2>
 
 
-            <!-- Options -->
+            <!-- Options will be added by JavaScript -->
 
-            <div class="options">
-
-
-                <label class="option">
-
-                    <input
-                        type="radio"
-                        name="answer"
-                        value="0"
-                    >
-
-                    <span id="option0"></span>
-
-                </label>
+            <div id="options" class="options"></div>
 
 
-                <label class="option">
+            <p id="answerMessage"></p>
 
-                    <input
-                        type="radio"
-                        name="answer"
-                        value="1"
-                    >
-
-                    <span id="option1"></span>
-
-                </label>
-
-
-                <label class="option">
-
-                    <input
-                        type="radio"
-                        name="answer"
-                        value="2"
-                    >
-
-                    <span id="option2"></span>
-
-                </label>
-
-
-                <label class="option">
-
-                    <input
-                        type="radio"
-                        name="answer"
-                        value="3"
-                    >
-
-                    <span id="option3"></span>
-
-                </label>
-
-
-            </div>
-
-
-            <!-- Buttons -->
 
             <div class="button-area">
-
 
                 <button
                     id="nextButton"
                     onclick="nextQuestion()"
+                    disabled
                 >
                     Next
                 </button>
@@ -201,7 +137,6 @@
                 >
                     Submit
                 </button>
-
 
             </div>
 
@@ -217,23 +152,18 @@
 
             <h1>Quiz Completed!</h1>
 
-
             <p id="studentResult"></p>
-
 
             <p>
                 Roll No:
                 <span id="resultRollNo"></span>
             </p>
 
-
             <p>
                 Section:
                 <span id="resultSection"></span>
             </p>
 
-
-            <!-- Score -->
 
             <div class="score">
 
@@ -246,12 +176,8 @@
             </div>
 
 
-            <!-- Result Message -->
-
             <p id="message"></p>
 
-
-            <!-- Try Again -->
 
             <button onclick="restartQuiz()">
                 Try Again
@@ -259,11 +185,10 @@
 
         </div>
 
-
     </div>
 
 
-    <!-- Connect JavaScript file -->
+    <!-- Connect JavaScript -->
 
     <script src="Assignment1.js"></script>
 
